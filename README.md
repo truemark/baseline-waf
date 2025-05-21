@@ -66,7 +66,7 @@ The WAF deployment depends on the `deployType` context value.
 ###  Deploy Regional WAF
 
 ```bash
-cdk deploy --context webAclName=<webAclName> --context deployType=regional
+cdk deploy --context webAclName=<webAclName> --context deployType=regional --context mode=active
 ```
 
 This creates a WAF Web ACL associated with regional resources (like ALBs or API Gateway).
@@ -74,7 +74,7 @@ This creates a WAF Web ACL associated with regional resources (like ALBs or API 
 ###  Deploy CloudFront WAF
 
 ```bash
-cdk deploy --context webAclName=<webAclName> --context deployType=cloudfront
+cdk deploy --context webAclName=<webAclName> --context deployType=cloudfront --context mode=active
 ```
 
 This creates a WAF Web ACL suitable for CloudFront distributions.
@@ -102,6 +102,7 @@ The CDK app relies on two context variables:
 |---------------|--------------------------------------------|-------------|
 | `webAclName`  | Base name for the WAF                      | `TestingWAF` |
 | `deployType`  | Deployment mode, either `cloudfront` or `regional` | `regional` |
+| `mode`        | WAF mode, either `active` or `count`      | `active`    |
 
 ---
 
@@ -112,7 +113,7 @@ The WAF ACLs created by this stack include:
 - Blocking requests from high-risk countries (`CN`, `RU`, `KP`)
 - Rate-based rules (limit: 1000 requests)
 - URI rule matching `/api/login` with country filtering
-- Operating in `count` mode (can be changed to `block` post-deployment)
+- Operating in `count` mode (can be changed to `active` post-deployment)
 
 ---
 
@@ -121,7 +122,7 @@ The WAF ACLs created by this stack include:
 To remove the stack from your AWS account:
 
 ```bash
-cdk destroy --context webAclName=<webAclName> --context deployType=regional
+cdk destroy --context webAclName=<webAclName> --context deployType=regional --context mode=active
 ```
 
 ---
