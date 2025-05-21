@@ -1,10 +1,12 @@
-import * as cdk from 'aws-cdk-lib';
+import { ExtendedStack, ExtendedStackProps } from 'truemark-cdk-lib/aws-cdk';
 import { CloudFrontSecurityBaselineWebAcl } from 'truemark-cdk-lib/aws-wafv2';
 import { RegionalSecurityBaselineWebAcl } from 'truemark-cdk-lib/aws-wafv2';
+import { ExtendedApp } from 'truemark-cdk-lib/aws-cdk';
 
 
-export class BaselineWafStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+
+export class BaselineWafStack extends ExtendedStack {
+  constructor(scope: ExtendedApp, id: string, props?: ExtendedStackProps) {
     super(scope, id, props);
 
     // Retrieve context variables

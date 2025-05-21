@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-import * as cdk from 'aws-cdk-lib';
+import 'source-map-support/register';
 import { BaselineWafStack } from '../lib/baseline-waf-stack';
+import { ExtendedApp } from 'truemark-cdk-lib/aws-cdk';
+
 
 // Define environment variables explicitly
 const env = {
@@ -8,5 +10,13 @@ const env = {
   region: process.env.CDK_DEFAULT_REGION
 };
 
-const app = new cdk.App();
-new BaselineWafStack(app, 'BaselineWafStack', { env });
+const app = new ExtendedApp({
+  standardTags: {
+    automationTags: {
+      id: 'baseline-waf',
+      url: 'https://github.com/truemark/baseline-waf',
+    },
+  },
+});
+
+new BaselineWafStack(app, 'BaselineWafStack', {});
